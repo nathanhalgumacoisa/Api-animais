@@ -17,5 +17,14 @@ export const chamarAnimal = (req, res) => {
     const animal = listaAnimais.chamarAnimalPeloId(id);
 
     if (!animal) res.status(404).json({message: "animal não encontrado"});
-        res.status(200).json(animal)
+        res.status(200).json(animal);
 }
+
+export const criarAnimal = (req, res) => {
+    const { nome, idade, tipo, cor, status, imagem } = req.body;
+    const animal = new Animal(nome, idade, tipo, cor, status, imagem);
+
+    listaAnimais.adicionar(animal);
+
+    return res.status(202).send(animal);
+} 
