@@ -26,5 +26,28 @@ export const criarAnimal = (req, res) => {
 
     listaAnimais.adicionar(animal);
 
-    return res.status(202).send(animal);
+    return res.status(200).send(animal);
 } 
+
+export const editarAnimal = (req, res) => {
+    const { id } = req.params;
+    const { nome, idade, tipo, cor, status, imagem  } = req.body;
+    const animal = listaAnimais.chamarAnimalPeloId(id);
+
+    if(!animal) res.status(404).send({message: "animal não encontrado"});
+    
+    listaAnimais.atualizarAnimal(id, nome, idade, tipo, cor, status, imagem);
+
+    return res.send(animal);
+}
+
+export const excluirAnimal = (req, res) => {
+    const { id } = req.params;
+    const animal = listaAnimais.chamarAnimalPeloId(id);
+
+    if(!animal) res.status(404).send({message: "animal não encontrado"});
+
+    listaAnimais.deletarAnimal(id);
+
+    return res.send(animal);
+}

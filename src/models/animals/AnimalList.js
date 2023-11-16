@@ -11,7 +11,7 @@ export class AnimalList {
         return this.listaAnimal.find((animal) => animal.id === id);
     }
 
-    adicionar(){
+    adicionar(animal){
         this.listaAnimal.push(animal);
     }
 
